@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "lib",
+    "domain",
+    "services/receipt_service",
+    "services/transfer_service",
+    "services/user_service",
+    "services/wallet_service"
+]
