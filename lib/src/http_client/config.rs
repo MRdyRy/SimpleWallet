@@ -6,11 +6,11 @@ pub struct HttpClientConfig {
     pub timeout_seconds: u64,
     pub max_idle_connections: usize,
     pub pool_idle_timeout_seconds: u64,
-    pub default_header_auth: Option<String>
+    pub default_header_auth: Option<String>,
 }
 
 impl HttpClientConfig {
-    pub fn from_env ()-> Self {
+    pub fn from_env() -> Self {
         dotenvy::dotenv().ok();
 
         let timeout_seconds = std::env::var("TIMEOUT_SECONDS")
@@ -42,12 +42,15 @@ impl HttpClientConfig {
             timeout_seconds,
             max_idle_connections,
             pool_idle_timeout_seconds,
-            default_header_auth: None,
+            default_header_auth: match default_header_auth.ok() {
+                None => None,
+                Some(d) => Some(d),
+            },
         }
     }
 
-    pub fn resolve_base_url (&self, key: &str) -> Option<String> {
-        let key = format!("{}_service_url",key.to_lowercase());
+    pub fn resolve_base_url(&self, key: &str) -> Option<String> {
+        let key = format!("{}_service_url", key.to_lowercase());
         self.base_url.get(&key).cloned()
     }
 }

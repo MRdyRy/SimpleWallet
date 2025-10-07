@@ -1,12 +1,15 @@
 use crate::base::base::{AuditMetadata, Auditable};
-use serde::{Deserialize, Serialize};
-use crate::transfer::transfer::Transfer;
 use crate::wallet::error::WalletError;
+use postgres_types::{FromSql, ToSql};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq, ToSql, FromSql)]
+#[postgres(name = "wallet_status")]
 pub enum WalletStatus {
+    #[postgres(name = "Active")]
     Active,
-    NonActive,
+    #[postgres(name = "Inactive")]
+    Inactive,
 }
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Wallet {

@@ -1,4 +1,5 @@
 use chrono::{DateTime, Utc};
+use postgres_types::{FromSql, ToSql};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -9,7 +10,7 @@ pub struct BaseResponse {
     pub data: Option<Value>
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, FromSql, ToSql)]
 pub struct AuditMetadata {
     pub created_date: DateTime<Utc>,
     pub updated_date: Option<DateTime<Utc>>,

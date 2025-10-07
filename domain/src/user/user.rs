@@ -1,5 +1,17 @@
+use postgres_types::{FromSql, ToSql};
 use crate::base::base::{AuditMetadata, Auditable};
 use serde::{Deserialize, Serialize};
+
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq, ToSql, FromSql)]
+#[postgres(name = "user_status")]
+pub enum UserStatus {
+    #[postgres(name = "Active")]
+    Active,
+    #[postgres(name = "Inactive")]
+    Inactive,
+}
+
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct User {
@@ -10,7 +22,7 @@ pub struct User {
 }
 
 impl User {
-    pub fn new(id: i32, email: &str, name: &str) -> Self {
+    pub fn new(email: &str, name: &str) -> Self {
         Self {
             id: None,
             email: email.into(),

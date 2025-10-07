@@ -4,3 +4,16 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+tokio = "1.47.1"
+deadpool-postgres = "0.14"
+tokio-postgres = { version = "0.7", features = ["with-serde_json-1"] }
+axum = "0.8.6"
+reqwest = {version = "0.12.23", features = ["json"]}
+serde = "1.0.228"
+domain = {path = "../../domain"}
+tracing = "0.1.41"
+lib = {path = "../../lib"}
+anyhow = "1.0.100"
+async-trait = "0.1.89"
+mockall = "0.13.1"
+chrono = { version = "0.4", features = ["serde"] }
