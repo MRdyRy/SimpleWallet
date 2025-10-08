@@ -1,13 +1,18 @@
 use chrono::{DateTime, Utc};
 use postgres_types::{FromSql, ToSql};
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct BaseResponse {
+pub struct BaseResponse<T> {
     pub trace_id : String,
     pub message: String,
-    pub data: Option<Value>
+    pub data: Option<T>
+}
+
+impl<T> BaseResponse<T> {
+    pub fn new(trace_id : String, message : String, data: Option<T>) -> Self {
+        Self { trace_id, message, data }
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone, FromSql, ToSql)]

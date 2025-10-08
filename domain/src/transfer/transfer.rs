@@ -10,7 +10,7 @@ pub enum TransferStatus {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Transfer {
     pub id: Option<i32>,
-    pub account_debet: String,
+    pub account_debit: String,
     pub account_credit: String,
     pub amount: f64,
     pub status: TransferStatus,
@@ -27,7 +27,7 @@ impl Transfer {
     ) -> Self {
         Self {
             id: None,
-            account_debet: account_debet.to_string(),
+            account_debit: account_debet.to_string(),
             account_credit: account_credit.to_string(),
             amount,
             status,
